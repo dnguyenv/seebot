@@ -39,11 +39,9 @@ micInputStream.on('silence', function() {
 });
 micInstance.start();
 
-initPins();
-
 speak(config.Speak.greet);
 
-console.log("TJBot is listening, you may speak now.");
+console.log("Thien An bot is listening, you may speak now.");
 
 var recognizeparams = {
   content_type: 'audio/l16; rate=44100; channels=2',
@@ -69,34 +67,19 @@ textStream.on('error', function(err) {
 /*Parse the recognized text to determine next step */
 
 function parseText(text) {
-  var containsTurn = (text.indexOf("turn") >= 0),
-    containsChange = text.indexOf("change") >= 0,
-    containsSet = text.indexOf("set") >= 0,
-    containsLight = (text.indexOf("light") >= 0),
+  var containsRec = (text.indexOf("recognize") >= 0),
+    containsCan = text.indexOf("can") >= 0,
+    containsYou = text.indexOf("you") >= 0,
+    containsDo = text.indexOf("do") >= 0,
+    containsKno = (text.indexOf("know") >= 0),
     containsSee = (text.indexOf("see") >= 0);
-  if ((containsTurn || containsChange || containsSet) && containsLight || containsSee) {
+  if ((containsDo || containsCan || containsDo) && containsKno || containsSee || containsRec) {
     parseCommand(text);
   }
 }
 
-/* Mapping command to rpio value */
+var seeCommandList = ['see','sea','recognize'];
 
-var lightCommandList = {
-  "off": rpio.LOW,
-  "on": rpio.HIGH
-}
-
-var seeCommandList = ['see','sea'];
-
-/*Initialize the pins*/
-function initPins() {
-  rpio.open(config.Pins.LIGHT_PIN, rpio.OUTPUT, rpio.LOW);
-}
-
-/* flip the LIGHT_PIN to gpioVal */
-var switchLight = function(gpioVal) {
-  rpio.write(config.Pins.LIGHT_PIN, gpioVal);
-}
 // reset the pin before exist
 process.on('SIGINT', function() {
   initPins();
@@ -110,45 +93,28 @@ process.on('SIGINT', function() {
 function parseCommand(text) {
   var words = text.split(" ");
   for (var i = 0; i < words.length; i++) {
-    if (words[i] in lightCommandList) {
-      processCommand(words[i]);
-      break;
-    } else if (seeCommandList.indexOf(words[i])>-1) {
-      processSeeCommand('see');
+    if (seeCommandList.indexOf(words[i])>-1) {
+      var mapArr = ['see','recognize'];
+      var rand = mapArr[Math.floor(Math.random() * mapArr.length)];
+      processSeeCommand(rand);
     }
   }
-}
-
-/* Speak the sentence accordingly to the command, and switch the light*/
-
-var processLightCommand = function(command) {
-
-  speak(config.Speak[command]);
-
-  setTimeout(function() {
-    switchLight(lightCommandList[command])
-  }, 5000);
-
 }
 
 
 /* Speak the sentence accordingly to the command, and switch the light*/
 
 var processSeeCommand = function(command) {
-
   speak(config.Speak[command]);
-
   setTimeout(function() {
     takePicture().then(function(result) {
-      console.log(result);
       tj.recognizeObjectsInPhoto(result)
       .then(function(objects){
         var str = objects[0].class;
-        console.log(str);
         speak('OK, this looks like a ' + str);
       })
     })
-  }, 5000);
+  }, 2000);
 
 }
 
