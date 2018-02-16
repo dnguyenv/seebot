@@ -1,10 +1,10 @@
 /*
-Thien An Bot recipe to turn on/off a lamp using Watson text to speech and Watson
-speech to text service
+Thien An Bot recipe to recognize objects using Watson text to speech, Watson
+speech to text, and Watson Visual Recognition service
 Duy Nguyen (dnguyenv@us.ibm.com)
 */
-var rpio = require('rpio'),
-  watson = require('watson-developer-cloud'),
+
+var  watson = require('watson-developer-cloud'),
   config = require('./config'),
   exec = require('child_process').execSync,
   fs = require('fs'),
