@@ -75,6 +75,7 @@ function parseText(text) {
     containsSee = (text.indexOf("see") >= 0);
   if ((containsDo || containsCan || containsYou) && (containsKno || containsSee || containsRec)){
     parseCommand(text);
+    //console.log('test');
   }
 }
 
@@ -96,6 +97,7 @@ function parseCommand(text) {
       var mapArr = ['see','recognize'];
       var rand = mapArr[Math.floor(Math.random() * mapArr.length)];
       processSeeCommand(rand);
+      break;
     }
   }
 }
