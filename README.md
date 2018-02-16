@@ -40,6 +40,12 @@ Once the service is created, go to `Service credentials` , `View credentials` se
 
 ![images](images/stt-cre-name.png)
 
+### Create Watson Visual Recognition service
+
+Similarly to the Text To Speech and Speech To Text service, create a Visual Recognition service and then record the credentials to be used later in the code
+
+![images](images/visual.png)
+
 ### Clone the code and install dependencies
 
 Clone the source code:
