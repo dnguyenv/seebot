@@ -140,6 +140,7 @@ var processSeeCommand = function(command) {
 
   setTimeout(function() {
     takePicture().then(function(result) {
+      console.log(result);
       tj.recognizeObjectsInPhoto(result)
       .then(function(objects){
         console.log(objects);
