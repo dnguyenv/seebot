@@ -145,7 +145,7 @@ var processSeeCommand = function(command) {
       .then(function(objects){
         var str = objects[0].class;
         console.log(str);
-        speak('OK, this looks like a ', str);
+        speak('OK, this looks like a ' + str);
       })
     })
   }, 5000);
