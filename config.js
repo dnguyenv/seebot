@@ -1,6 +1,6 @@
 exports.SpeechToText = {
   "password": "",
-  "username": "",
+  "username": "-155c-443a-b776-",
   "version": "v1"
 }
 // You can change the voice of the robot to your favorite voice.
@@ -13,13 +13,17 @@ exports.SpeechToText = {
 exports.TextToSpeech = {
   "voice": "es-ES_LauraVoice",
   "password": "",
-  "username": "6f249b5e-",
+  "username": "-1273-4a06-b07a-",
   "version": "v1"
 }
 
 exports.VisualRecognition = {
-  api_key: ''
-  configuration: {
+  credentials:{
+        visual_recognition:{
+            api_key: ''
+        }
+  },
+configuration: {
     robot: {
       gender: 'male',
       name: 'An'
@@ -40,14 +44,8 @@ exports.VisualRecognition = {
   }
 }
 
-exports.Pins = {
-  "LIGHT_PIN": 36
-}
-
 exports.Speak = {
-  "on": "Alright, I'm turning the light on for you, stay turned",
-  "off": "Cool, no worry, I'm turning the light off for you now",
-  "bye": "OK, take care, goodbye",
-  "pop": "OK , I'm turning the light off",
-  "see": "OK , give me some seconds"
+  "see": "OK , give me some seconds please",
+  "recognize": "Alright, I am processing it, please give me some seconds",
+  "greet": "Hi, how are you doing? I am Thien An bot. What can I do for you?"
 }
