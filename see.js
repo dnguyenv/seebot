@@ -73,7 +73,7 @@ function parseText(text) {
     containsDo = text.indexOf("do") >= 0,
     containsKno = (text.indexOf("know") >= 0),
     containsSee = (text.indexOf("see") >= 0);
-  if ((containsDo || containsCan || containsDo) && containsKno || containsSee || containsRec) {
+  if ((containsDo || containsCan || containsDo) && (containsKno || containsSee || containsRec)){
     parseCommand(text);
   }
 }
@@ -82,7 +82,6 @@ var seeCommandList = ['see','sea','recognize'];
 
 // reset the pin before exist
 process.on('SIGINT', function() {
-  initPins();
   process.nextTick(function() {
     process.exit(0);
   });
