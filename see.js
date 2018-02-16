@@ -10,12 +10,13 @@ var rpio = require('rpio'),
   fs = require('fs'),
   Q = require('q'),
   text_to_speech = watson.text_to_speech(config.TextToSpeech),
-  tjbot = require('tjbot'),
+  TJBot = require('tjbot'),
   speech_to_text = watson.speech_to_text(config.SpeechToText);
 
 // Initiate Microphone Instance to Get audio samples
 var mic = require('mic');
 var hardware = ['camera'];
+var tj = new TJBot(hardware, config.VisualRecognition.configuration, config.VisualRecognition.credentials);
 
 var micInstance = mic({
   'rate': '44100',
@@ -139,7 +140,10 @@ var processSeeCommand = function(command) {
 
   setTimeout(function() {
     takePicture().then(function(result) {
-      console.log(result);
+      tj.recognizeObjectsInPhoto(result)
+      .then(function(objects){
+        console.log(objects);
+      })
     })
   }, 5000);
 
@@ -158,7 +162,7 @@ var takePicture = function() {
 
   myCamera.snap()
     .then((result) => {
-      d.resolve(result);
+      d.resolve(myCamera.output);
       // Your picture was captured
     })
     .catch((error) => {
