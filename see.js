@@ -85,7 +85,7 @@ var lightCommandList = {
   "on": rpio.HIGH
 }
 
-var lightCommandList = ['see','sea'];
+var seeCommandList = ['see','sea','the'];
 
 /*Initialize the pins*/
 function initPins() {
