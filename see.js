@@ -73,8 +73,9 @@ function parseText(text) {
     containsChange = text.indexOf("change") >= 0,
     containsSet = text.indexOf("set") >= 0,
     containsLight = (text.indexOf("light") >= 0),
-    containsSee = (text.indexOf("see") >= 0);
-  if ((containsTurn || containsChange || containsSet) && containsLight || containsSee) {
+    containsSee = (text.indexOf("see") >= 0),
+    containsHow = (text.indexOf("how about") >= 0);
+  if ((containsTurn || containsChange || containsSet) && containsLight || containsSee || containsHow) {
     parseCommand(text);
   }
 }
