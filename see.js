@@ -4,7 +4,7 @@ speech to text, and Watson Visual Recognition service
 Duy Nguyen (dnguyenv@us.ibm.com)
 */
 
-var  watson = require('watson-developer-cloud'),
+var watson = require('watson-developer-cloud'),
   config = require('./config'),
   exec = require('child_process').execSync,
   fs = require('fs'),
@@ -73,13 +73,13 @@ function parseText(text) {
     containsDo = text.indexOf("do") >= 0,
     containsKno = (text.indexOf("know") >= 0),
     containsSee = (text.indexOf("see") >= 0);
-  if ((containsDo || containsCan || containsYou) && (containsKno || containsSee || containsRec)){
+  if ((containsDo || containsCan || containsYou) && (containsKno || containsSee || containsRec)) {
     parseCommand(text);
     //console.log('test');
   }
 }
 
-var seeCommandList = ['see','sea','recognize','know'];
+var seeCommandList = ['see', 'sea', 'recognize', 'know'];
 
 // reset the pin before exist
 process.on('SIGINT', function() {
@@ -93,8 +93,8 @@ process.on('SIGINT', function() {
 function parseCommand(text) {
   var words = text.split(" ");
   for (var i = 0; i < words.length; i++) {
-    if (seeCommandList.indexOf(words[i])>-1) {
-      var mapArr = ['see','recognize'];
+    if (seeCommandList.indexOf(words[i]) > -1) {
+      var mapArr = ['see', 'recognize'];
       var rand = mapArr[Math.floor(Math.random() * mapArr.length)];
       processSeeCommand(rand);
       break;
@@ -109,10 +109,10 @@ var processSeeCommand = function(command) {
   setTimeout(function() {
     takePicture().then(function(result) {
       tj.recognizeObjectsInPhoto(result)
-      .then(function(objects){
-        var str = objects[0].class;
-        speak('OK, this looks like a ' + str);
-      })
+        .then(function(objects) {
+          var str = objects[0].class;
+          speak('OK, this looks like a ' + str);
+        })
     })
   }, 5000);
 

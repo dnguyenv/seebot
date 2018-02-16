@@ -18,12 +18,12 @@ exports.TextToSpeech = {
 }
 
 exports.VisualRecognition = {
-  credentials:{
-        visual_recognition:{
-            api_key: ''
-        }
+  credentials: {
+    visual_recognition: {
+      api_key: ''
+    }
   },
-configuration: {
+  configuration: {
     robot: {
       gender: 'male',
       name: 'An'
