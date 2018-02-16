@@ -143,7 +143,9 @@ var processSeeCommand = function(command) {
       console.log(result);
       tj.recognizeObjectsInPhoto(result)
       .then(function(objects){
-        console.log(objects);
+        var str = objects[0].class;
+        console.log(str);
+        speak('OK, this looks like a ', str);
       })
     })
   }, 5000);
