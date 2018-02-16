@@ -115,7 +115,7 @@ var processSeeCommand = function(command) {
         speak('OK, this looks like a ' + str);
       })
     })
-  }, 2000);
+  }, 5000);
 
 }
 
