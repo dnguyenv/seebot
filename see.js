@@ -79,7 +79,7 @@ function parseText(text) {
   }
 }
 
-var seeCommandList = ['see','sea','recognize'];
+var seeCommandList = ['see','sea','recognize','know'];
 
 // reset the pin before exist
 process.on('SIGINT', function() {
@@ -101,7 +101,6 @@ function parseCommand(text) {
     }
   }
 }
-
 
 /* Speak the sentence accordingly to the command, and switch the light*/
 
