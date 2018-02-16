@@ -153,10 +153,10 @@ var processSeeCommand = function(command) {
 var takePicture = function() {
   var d = Q.defer();
   const PiCamera = require('pi-camera');
-  var output = `${ __dirname }/test.jpg`;
+  var out = '/tmp/test.jpg';
   const myCamera = new PiCamera({
     mode: 'photo',
-    output: output,
+    output: out,
     width: 960,
     height: 720,
     nopreview: true,
@@ -164,7 +164,8 @@ var takePicture = function() {
 
   myCamera.snap()
     .then((result) => {
-      d.resolve(output);
+      console.log(out);
+      d.resolve(out);
       // Your picture was captured
     })
     .catch((error) => {
