@@ -85,7 +85,7 @@ var lightCommandList = {
   "on": rpio.HIGH
 }
 
-var seeCommandList = ['see','sea','the'];
+var seeCommandList = ['see','sea'];
 
 /*Initialize the pins*/
 function initPins() {
@@ -112,7 +112,7 @@ function parseCommand(text) {
     if (words[i] in lightCommandList) {
       processCommand(words[i]);
       break;
-    } else if (words[i] in seeCommandList) {
+    } else if (seeCommandList.indexOf(words[i])>-1) {
       processSeeCommand(words[i]);
     }
   }
