@@ -74,7 +74,7 @@ function parseText(text) {
     containsKno = (text.indexOf("know") >= 0),
     containsSee = (text.indexOf("see") >= 0);
   if ((containsDo || containsCan || containsYou) && (containsKno || containsSee || containsRec)) {
-    micInstance.stop();
+    micInstance.pause();
     parseCommand(text);
     //console.log('test');
   }
@@ -113,7 +113,7 @@ var processSeeCommand = function(command) {
         .then(function(objects) {
           var str = objects[0].class;
           speak('OK, this looks like a ' + str);
-          micInstance.start();
+          micInstance.resume();
         })
     })
   }, 3000);
