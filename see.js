@@ -94,7 +94,7 @@ function parseCommand(text) {
   var words = text.split(" ");
   for (var i = 0; i < words.length; i++) {
     if (seeCommandList.indexOf(words[i]) > -1) {
-      var mapArr = ['see', 'recognize'];
+      var mapArr = ['see', 'recognize', 'know'];
       var rand = mapArr[Math.floor(Math.random() * mapArr.length)];
       processSeeCommand(rand);
       break;
@@ -114,7 +114,7 @@ var processSeeCommand = function(command) {
           speak('OK, this looks like a ' + str);
         })
     })
-  }, 5000);
+  }, 2000);
 
 }
 
