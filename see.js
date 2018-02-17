@@ -127,8 +127,8 @@ var takePicture = function() {
   const myCamera = new PiCamera({
     mode: 'photo',
     output: out,
-    width: 480,
-    height: 360,
+    width: 960,
+    height: 720,
     nopreview: true,
   });
 

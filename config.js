@@ -34,8 +34,8 @@ exports.VisualRecognition = {
         text: 0.5 // only list text tags with confidence > 0.5
       },
       camera: {
-        height: 360,
-        width: 480,
+        height: 720,
+        width: 960,
         verticalFlip: false, // flips the image vertically, may need to set to 'true' if the camera is installed upside-down
         horizontalFlip: false // flips the image horizontally, should not need to be overridden
       }
