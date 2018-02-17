@@ -1,7 +1,7 @@
 var tesseract = require('node-tesseract');
 
 // Recognize text of any language in any format
-tesseract.process(__dirname + '/tmp/test.jpg',options,function(err, text) {
+tesseract.process('/tmp/test.jpg',options,function(err, text) {
     if(err) {
         console.error(err);
     } else {
