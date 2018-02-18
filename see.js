@@ -116,7 +116,7 @@ var processCommand = function(command, state) {
   speak(config.Speak[state]);
   setTimeout(function() {
     takePicture().then(function(result) {
-      if command == 'read' {
+      if (command == 'read') {
         readPicture()
         .then(function(result){
           if (result) then {
@@ -126,7 +126,7 @@ var processCommand = function(command, state) {
           }
           micInstance.resume();
         });
-      } else {
+      } else if(command=='see') {
         tj.recognizeObjectsInPhoto(result)
           .then(function(objects) {
             var str = objects[0].class;
