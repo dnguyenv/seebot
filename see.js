@@ -119,7 +119,7 @@ var processCommand = function(command, state) {
       if (command == 'read') {
         readPicture()
         .then(function(result){
-          if (result) then {
+          if (result) {
             speak('The content is ' + result);
           }else{
             speak('Sorry I can not read it');
