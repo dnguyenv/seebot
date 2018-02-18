@@ -48,5 +48,6 @@ exports.Speak = {
   "see": "OK , give me some seconds please",
   "recognize": "Alright, I am processing it, please give me some seconds",
   "know": "Sure, let me give it a try, please wait for a moment",
-  "greet": "Hi! Chuc mung nam moi! I am Thien An bot. What can I do for you?"
+  "greet": "Hi! Chuc mung nam moi! I am Thien An bot. What can I do for you?",
+  "read": "Ok, give me a moment please"
 }

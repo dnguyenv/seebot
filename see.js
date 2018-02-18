@@ -16,6 +16,7 @@ var watson = require('watson-developer-cloud'),
 // Initiate Microphone Instance to Get audio samples
 var mic = require('mic');
 var hardware = ['camera'];
+var tesseract = require('node-tesseract');
 var tj = new TJBot(hardware, config.VisualRecognition.configuration, config.VisualRecognition.credentials);
 
 var micInstance = mic({
@@ -72,15 +73,20 @@ function parseText(text) {
     containsYou = text.indexOf("you") >= 0,
     containsDo = text.indexOf("do") >= 0,
     containsKno = (text.indexOf("know") >= 0),
-    containsSee = (text.indexOf("see") >= 0);
-  if ((containsDo || containsCan || containsYou) && (containsKno || containsSee || containsRec)) {
+    containsSee = (text.indexOf("see") >= 0),
+    containsRead = (text.indexOf("read") >= 0);
+  if ((containsDo || containsCan || containsYou) && (containsKno || containsSee || containsRec || containsRead)) {
     micInstance.pause();
     parseCommand(text);
     //console.log('test');
   }
+  /* else if ((containsCan || containsYou) && containsRead)){
+      parseCommand(text);
+    }*/
 }
 
 var seeCommandList = ['see', 'sea', 'recognize', 'know'];
+var readCommandList = ['read'];
 
 // reset the pin before exist
 process.on('SIGINT', function() {
@@ -97,27 +103,59 @@ function parseCommand(text) {
     if (seeCommandList.indexOf(words[i]) > -1) {
       var mapArr = ['see', 'recognize', 'know'];
       var rand = mapArr[Math.floor(Math.random() * mapArr.length)];
-      processSeeCommand(rand);
+      processCommand('see', rand);
+      break;
+    } else if (readCommandList.indexOf(words[i]) > -1) {
+      processCommand('read', 'read');
       break;
     }
   }
 }
 
-/* Speak the sentence accordingly to the command, and switch the light*/
-
-var processSeeCommand = function(command) {
-  speak(config.Speak[command]);
+var processCommand = function(command, state) {
+  speak(config.Speak[state]);
   setTimeout(function() {
     takePicture().then(function(result) {
-      tj.recognizeObjectsInPhoto(result)
-        .then(function(objects) {
-          var str = objects[0].class;
-          speak('OK, this looks like a ' + str);
+      if command == 'read' {
+        readPicture()
+        .then(function(result){
+          if (result) then {
+            speak('The content is ' + result);
+          }else{
+            speak('Sorry I can not read it');
+          }
           micInstance.resume();
-        })
+        });
+      } else {
+        tj.recognizeObjectsInPhoto(result)
+          .then(function(objects) {
+            var str = objects[0].class;
+            speak('OK, this looks like a ' + str);
+            micInstance.resume();
+          });
+      }
     })
   }, 3000);
 
+}
+
+var readPicture = function(){
+  var d = Q.defer();
+  var input = '/tmp/test.jpg';
+  var options = {
+      l: 'eng',
+      psm: 6,
+      binary: '/usr/bin/tesseract'
+  };
+  tesseract.process('/tmp/test.jpg',options,function(err, text) {
+      if(err) {
+          console.error(err);
+      } else {
+          console.log(text);
+          d.resolve(text);
+      }
+  });
+  return d.promise;
 }
 
 var takePicture = function() {
