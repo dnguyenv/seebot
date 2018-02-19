@@ -151,7 +151,7 @@ var readPicture = function() {
   var options = {
     l: 'eng',
     psm: 6,
-    binary: '/usr/bin/tesseract'
+    binary: '/usr/bin/tesseract' //Path to OCR executable
   };
   tesseract.process('/tmp/test.jpg', options, function(err, text) {
     if (err) {

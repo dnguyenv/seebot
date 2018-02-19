@@ -46,6 +46,12 @@ Similarly to the Text To Speech and Speech To Text service, create a Visual Reco
 
 ![images](images/visual.png)
 
+### Install OCR application on your Pi
+
+```
+sudo apt-get install tesseract-ocr-eng
+```
+
 ### Clone the code and install dependencies
 
 Clone the source code:
