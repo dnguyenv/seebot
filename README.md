@@ -1,4 +1,4 @@
-# Thien An Bot Lightup
+# Thien An Bot Sees and Reads
 
 This recipe guides you through how to connect your Raspberry Pi to IBM Watson services and make a simple robot which can listen to your commands, recognize objects, report back in voice. It can also read text content in English.
 
