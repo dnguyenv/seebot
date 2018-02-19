@@ -1,6 +1,6 @@
 exports.SpeechToText = {
-  "password": "YA1mOVAmKy5G",
-  "username": "63af2bf2-155c-443a-b776-a97e6148eb21",
+  "password": "YA1mOV",
+  "username": "63af2bf2-155c",
   "version": "v1"
 }
 // You can change the voice of the robot to your favorite voice.
@@ -12,15 +12,15 @@ exports.SpeechToText = {
 //Credentials for Watson Text to Speech service
 exports.TextToSpeech = {
   "voice": "en-US_LisaVoice",
-  "password": "vRkfQjj3n4Gd",
-  "username": "6f249b5e-1273-4a06-b07a-d6517c093209",
+  "password": "vR",
+  "username": "6f249b5e-1273-4a06-b0",
   "version": "v1"
 }
 
 exports.VisualRecognition = {
   credentials: {
     visual_recognition: {
-      api_key: 'c7f2a93a038fc03c5369d3799f081b2c5b5d1219'
+      api_key: 'c7f2a93a038fc03c5369d3799'
     }
   },
   configuration: {

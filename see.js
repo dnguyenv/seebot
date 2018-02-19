@@ -65,7 +65,8 @@ textStream.on('error', function(err) {
   console.log("Press <ctrl>+C to exit.");
 });
 
-/*Parse the recognized text to determine next step */
+/*Parse the recognized text to determine next step. This is just a dump way to
+do, you can use Natural Language Classifier service from Watson to advance this part*/
 
 function parseText(text) {
   var containsRec = (text.indexOf("recognize") >= 0),
@@ -78,17 +79,14 @@ function parseText(text) {
   if ((containsDo || containsCan || containsYou) && (containsKno || containsSee || containsRec || containsRead)) {
     micInstance.pause();
     parseCommand(text);
-    //console.log('test');
   }
-  /* else if ((containsCan || containsYou) && containsRead)){
-      parseCommand(text);
-    }*/
 }
 
+/* See and Read commands list*/
 var seeCommandList = ['see', 'sea', 'recognize', 'know'];
 var readCommandList = ['read'];
 
-// reset the pin before exist
+/* Exit the app */
 process.on('SIGINT', function() {
   process.nextTick(function() {
     process.exit(0);
@@ -101,6 +99,7 @@ function parseCommand(text) {
   var words = text.split(" ");
   for (var i = 0; i < words.length; i++) {
     if (seeCommandList.indexOf(words[i]) > -1) {
+      /*Randomly select messages to speak from the list in config.js file*/
       var mapArr = ['see', 'recognize', 'know'];
       var rand = mapArr[Math.floor(Math.random() * mapArr.length)];
       processCommand('see', rand);
@@ -112,26 +111,31 @@ function parseCommand(text) {
   }
 }
 
-var processCommand = function(command, state) {
-  speak(config.Speak[state]);
+/* Process command based on category `read` or `see`*/
+
+var processCommand = function(command, statement) {
+  speak(config.Speak[statement]);
+
   setTimeout(function() {
+    /*Take a picture */
     takePicture().then(function(result) {
+      /* Read the content on the picture */
       if (command == 'read') {
         readPicture()
-        .then(function(result){
-          if (result) {
-            speak('The content is ' + result);
-          }else{
-            speak('Sorry I can not read it');
-          }
-          micInstance.resume();
-        });
-      } else if(command=='see') {
+          .then(function(result) {
+            if (result) {
+              speak('The content is ' + result);
+            } else {
+              speak('Sorry I can not read it');
+            }
+            micInstance.resume(); // Resume the voice recording once done
+          });
+      } else if (command == 'see') { // recognize the object from the picture
         tj.recognizeObjectsInPhoto(result)
           .then(function(objects) {
             var str = objects[0].class;
             speak('OK, this looks like a ' + str);
-            micInstance.resume();
+            micInstance.resume(); // Resume the voice recording once done
           });
       }
     })
@@ -139,25 +143,28 @@ var processCommand = function(command, state) {
 
 }
 
-var readPicture = function(){
+/* Call OCR application to extract the text content from the picture */
+
+var readPicture = function() {
   var d = Q.defer();
   var input = '/tmp/test.jpg';
   var options = {
-      l: 'eng',
-      psm: 6,
-      binary: '/usr/bin/tesseract'
+    l: 'eng',
+    psm: 6,
+    binary: '/usr/bin/tesseract'
   };
-  tesseract.process('/tmp/test.jpg',options,function(err, text) {
-      if(err) {
-          console.error(err);
-      } else {
-          console.log(text);
-          d.resolve(text);
-      }
+  tesseract.process('/tmp/test.jpg', options, function(err, text) {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(text);
+      d.resolve(text);
+    }
   });
   return d.promise;
 }
 
+/* Take picture and save to a temp location. This needs to be improved */
 var takePicture = function() {
   var d = Q.defer();
   const PiCamera = require('pi-camera');
@@ -169,15 +176,13 @@ var takePicture = function() {
     height: 720,
     nopreview: true,
   });
-
   myCamera.snap()
     .then((result) => {
       console.log(out);
       d.resolve(out);
-      // Your picture was captured
     })
     .catch((error) => {
-      // Handle your error
+      console.log('Something wrong when taking the picture. Details: ' + error);
     });
   return d.promise;
 }
@@ -185,7 +190,6 @@ var takePicture = function() {
 /* Stream the resuting audio data to file and play back*/
 
 function speak(text) {
-  //micInstance.stop();
   var params = {
     text: text,
     voice: config.TextToSpeech.voice,
