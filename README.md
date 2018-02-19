@@ -1,6 +1,6 @@
 # Thien An Bot Lightup
 
-This recipe guides you through how to connect your Raspberry Pi to IBM Watson services and make a simple robot which can listen to your commands and recognize objects, then report back in voice.
+This recipe guides you through how to connect your Raspberry Pi to IBM Watson services and make a simple robot which can listen to your commands, recognize objects, report back in voice. It can also read text content in English.
 
 Click [here](https://youtu.be/ls16g3OT6JE) or on the picture below to see the demo:
 

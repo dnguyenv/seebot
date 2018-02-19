@@ -1,7 +1,7 @@
 {
   "name": "SeeBot",
-  "version": "1.0.0",
-  "description": "Thien An Bot Sees",
+  "version": "0.0.1",
+  "description": "Thien An Bot can see and read",
   "main": "see.js",
   "scripts": {
     "test": "node see.js",
@@ -20,7 +20,7 @@
     "STT",
     "Raspberry Pi"
   ],
-  "author": "Duy Nguyen",
+  "author": "Duy Nguyen dnguyenv@us.ibm.com",
   "dependencies": {
     "mic": "^2.1.1",
     "pi-camera": "^1.0.1",
