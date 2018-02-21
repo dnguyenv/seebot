@@ -1,5 +1,5 @@
 /*
-Thien An Bot recipe to recognize objects using Watson text to speech, Watson
+Thien An Bot recipe to read text, recognize objects using Watson text to speech, Watson
 speech to text, and Watson Visual Recognition service
 Duy Nguyen (dnguyenv@us.ibm.com)
 */
@@ -77,7 +77,7 @@ function parseText(text) {
     containsSee = (text.indexOf("see") >= 0),
     containsRead = (text.indexOf("read") >= 0);
   if ((containsDo || containsCan || containsYou) && (containsKno || containsSee || containsRec || containsRead)) {
-    micInstance.pause();
+    micInstance.pause(); // Pause the mic while processing to avoid un-neccessary audio streaming to server
     parseCommand(text);
   }
 }
