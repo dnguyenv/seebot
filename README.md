@@ -4,7 +4,7 @@ This recipe guides you through how to connect your Raspberry Pi to IBM Watson se
 
 Click [here](https://youtu.be/_zDEJHJ8LMI) or on the picture below to see the demo:
 
-[<img src="https://github.com/dnguyenv/seebot/blob/master/images/thienansee.png" width="200">](https://youtu.be/YLqLIy2ujnA)
+[<img src="https://github.com/dnguyenv/seebot/blob/master/images/thienansee.png" width="200">](https://youtu.be/_zDEJHJ8LMI)
 
 ## Architecture overview
 
