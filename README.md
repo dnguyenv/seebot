@@ -2,7 +2,7 @@
 
 This recipe guides you through how to connect your Raspberry Pi to IBM Watson services and make a simple robot which can listen to your commands, recognize objects, report back in voice. It can also read text content in English.
 
-Click [here](https://youtu.be/YLqLIy2ujnA) or on the picture below to see the demo:
+Click [here](https://youtu.be/_zDEJHJ8LMI) or on the picture below to see the demo:
 
 [<img src="https://github.com/dnguyenv/seebot/blob/master/images/thienansee.png" width="200">](https://youtu.be/YLqLIy2ujnA)
 
